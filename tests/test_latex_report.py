@@ -102,5 +102,91 @@ def test_generate_latex_report_scales_display_equations_to_page_width(tmp_path: 
     assert "\\begin{aligned}" in report_text
     assert "&=" in report_text
     assert "\\textbf{Abbreviations}" in report_text
+    assert "\\textbf{Equation}\\par\\vspace{-0.35em}" in report_text
+    assert "\\textbf{Abbreviations}\\par\\vspace{-0.35em}" in report_text
     assert "C_0" in report_text
     assert "SPWF" in report_text
+
+
+def test_generate_latex_report_preserves_required_section_order(tmp_path: Path):
+    output_path = tmp_path / "ordered-report.tex"
+    sample_data = {
+        "initial_stage": {"economic": {"time_cost_of_loan": 1.0}},
+        "use_stage": {"economic": {"routine_inspection_costs": 2.0}},
+        "reconstruction": {"economic": {"total_demolition_and_disposal_costs": 3.0}},
+        "end_of_life": {"economic": {"total_demolition_and_disposal_costs": 4.0}},
+        "warnings": [],
+        "notes": [],
+    }
+    sample_input_data = {
+        "general_parameters": {
+            "service_life_years": 75,
+            "analysis_period_years": 150,
+            "discount_rate_percent": 4,
+            "inflation_rate_percent": 2,
+            "interest_rate_percent": 7.75,
+            "currency_conversion": 1,
+        }
+    }
+    sample_construction_costs = {
+        "initial_construction_cost": 10,
+        "initial_carbon_emissions_cost": 20,
+        "superstructure_construction_cost": 30,
+        "total_scrap_value": 40,
+    }
+    debug_data = {
+        "initial_stage": {
+            "time_cost_of_loan": {
+                "formulae": {"time_cost_of_loan": "initial_cost_of_construction x interest_rate"},
+                "inputs": {"initial_cost_of_construction": 10, "interest_rate": 0.1},
+                "computed_values": {"time_cost_of_loan": 1.0},
+            }
+        },
+        "use_stage": {
+            "routine_inspection_costs": {
+                "breakdown": {
+                    "formulae": {"routine_inspection_cost_per_year": "initial_cost_of_construction x percentage_of_initial_construction_cost_per_year"},
+                    "inputs": {
+                        "initial_cost_of_construction": 10,
+                        "percentage_of_initial_construction_cost_per_year": 0.1,
+                    },
+                    "computed_values": {"routine_inspection_cost_per_year": 1.0},
+                }
+            }
+        },
+        "reconstruction": {
+            "present_worth_factor_for_demolition": {"75.52": 0.331},
+        },
+        "end_of_life": {
+            "present_worth_factor_for_demolition": {"150": 0.111},
+        },
+    }
+
+    generate_latex_report(
+        sample_data,
+        output_path=str(output_path),
+        input_data=sample_input_data,
+        construction_costs=sample_construction_costs,
+        debug_data=debug_data,
+    )
+
+    report_text = output_path.read_text(encoding="utf-8")
+
+    required_sections = [
+        "\\section*{Project Parameters}",
+        "\\section*{Construction Cost Inputs}",
+        "\\section{Initial Stage}",
+        "\\section{Use Stage}",
+        "\\section{Reconstruction}",
+        "\\section{End-of-Life Stage}",
+        "\\section{Summary}",
+    ]
+
+    positions = [report_text.index(section) for section in required_sections]
+    assert positions == sorted(positions)
+    assert "\\section{Detailed Calculations}" not in report_text
+
+    initial_stage_pos = report_text.index("\\section{Initial Stage}")
+    initial_stage_detail_pos = report_text.index("\\subsection{Detailed Calculations}")
+    use_stage_pos = report_text.index("\\section{Use Stage}")
+    assert initial_stage_pos < initial_stage_detail_pos < use_stage_pos

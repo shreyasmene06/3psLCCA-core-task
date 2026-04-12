@@ -100,6 +100,7 @@ SECTION_COMMANDS = {
     2: "subsection",
     3: "subsubsection",
 }
+COMPACT_HEADING_AFTERSPACE = "-0.35em"
 
 
 def escape_latex(value: Any) -> str:
@@ -155,7 +156,10 @@ def render_heading(title: str, level: int) -> str:
     if level <= 3:
         command = SECTION_COMMANDS[level]
         return f"\\{command}{{{escape_latex(humanize_key(title))}}}\n"
-    return f"\\textbf{{{escape_latex(humanize_key(title))}}}\n\n"
+    return (
+        f"\\textbf{{{escape_latex(humanize_key(title))}}}\\par"
+        f"\\vspace{{{COMPACT_HEADING_AFTERSPACE}}}\n"
+    )
 
 
 def safe_stage_title(stage_name: str) -> str:
@@ -497,7 +501,7 @@ def render_formula_entry(
         formula=formula,
         abbreviate=True,
     )
-    parts.append("\\textbf{Equation}\n\n")
+    parts.append(render_heading("equation", 4))
     parts.append(render_math_display(symbolic_lines))
 
     if inputs:
@@ -507,14 +511,12 @@ def render_formula_entry(
             inputs=inputs,
             abbreviate=True,
         )
-        parts.append("\\textbf{Substitution}\n\n")
+        parts.append(render_heading("substitution", 4))
         parts.append(render_math_display(substituted_lines))
 
     if result is not None:
         result_symbol = token_to_symbol(formula_name, legend)
-        parts.append(
-            "\\textbf{Result}\n\n"
-        )
+        parts.append(render_heading("result", 4))
         parts.append(
             render_math_display([f"{result_symbol} &= {format_math_number(result)}"])
         )
@@ -524,7 +526,7 @@ def render_formula_entry(
             (f"${symbol}$", escape_latex(humanize_key(token)))
             for token, symbol in legend.items()
         ]
-        parts.append("\\textbf{Abbreviations}\n\n")
+        parts.append(render_heading("abbreviations", 4))
         parts.append(render_tabularx(legend_rows, ("Symbol", "Meaning")))
 
     return "".join(parts)
@@ -656,7 +658,7 @@ def render_payload(
     ):
         block = payload.get(block_name)
         if isinstance(block, dict) and block:
-            parts.append(f"\\textbf{{{escape_latex(humanize_key(block_name))}}}\n\n")
+            parts.append(render_heading(block_name, 4))
             parts.append(render_kv_table(block, headers=header))
 
     if "note" in payload:
@@ -680,15 +682,33 @@ def render_payload(
     return "".join(parts)
 
 
-def render_stage_summary(stage_name: str, stage_data: dict[str, Any]) -> str:
+def render_stage_details(debug_payload: Any) -> str:
+    parts = ["\\subsection{Detailed Calculations}\n"]
+    if isinstance(debug_payload, dict):
+        for block_name, block_value in debug_payload.items():
+            parts.append(render_payload(block_name, block_value, level=3))
+    else:
+        parts.append(f"{format_value(debug_payload)}\n")
+    return "".join(parts)
+
+
+def render_stage_summary(
+    stage_name: str,
+    stage_data: dict[str, Any],
+    debug_payload: Any | None = None,
+) -> str:
     parts = [f"\\section{{{escape_latex(safe_stage_title(stage_name))}}}\n"]
 
     if not isinstance(stage_data, dict):
         parts.append(f"{format_value(stage_data)}\n")
+        if debug_payload:
+            parts.append(render_stage_details(debug_payload))
         return "".join(parts)
 
     if "Note" in stage_data and len(stage_data) == 1:
         parts.append(f"\\textit{{Note.}} {format_value(stage_data['Note'])}.\n")
+        if debug_payload:
+            parts.append(render_stage_details(debug_payload))
         return "".join(parts)
 
     summary_rows: list[tuple[str, str]] = []
@@ -721,6 +741,9 @@ def render_stage_summary(stage_name: str, stage_data: dict[str, Any]) -> str:
             parts.append(
                 render_scalar_mapping({category_name: category_values}, level=2)
             )
+
+    if debug_payload:
+        parts.append(render_stage_details(debug_payload))
 
     return "".join(parts)
 
@@ -774,23 +797,6 @@ def render_title_page(
     return "".join(parts)
 
 
-def render_debug_sections(debug_payloads: dict[str, Any]) -> str:
-    parts: list[str] = []
-    for stage_name in ("initial_stage", "use_stage", "reconstruction", "end_of_life"):
-        payload = debug_payloads.get(stage_name)
-        if not payload:
-            continue
-        parts.append(
-            f"\\subsection{{{escape_latex(safe_stage_title(stage_name))} Detailed Calculations}}\n"
-        )
-        if isinstance(payload, dict):
-            for block_name, block_value in payload.items():
-                parts.append(render_payload(block_name, block_value, level=3))
-        else:
-            parts.append(f"{format_value(payload)}\n")
-    return "".join(parts)
-
-
 def render_final_summary(data: dict[str, Any]) -> str:
     rows: list[tuple[str, str]] = []
     grand_total = 0.0
@@ -839,11 +845,18 @@ def generate_latex_report(
         stage_data = data.get(stage_name)
         if stage_data is None:
             continue
-        latex_parts.append(render_stage_summary(stage_name, stage_data))
-
-    if debug_payloads:
-        latex_parts.append("\\section{Detailed Calculations}\n")
-        latex_parts.append(render_debug_sections(debug_payloads))
+        stage_debug_payload = (
+            debug_payloads.get(stage_name)
+            if isinstance(debug_payloads, dict)
+            else None
+        )
+        latex_parts.append(
+            render_stage_summary(
+                stage_name,
+                stage_data,
+                debug_payload=stage_debug_payload,
+            )
+        )
 
     latex_parts.append(render_final_summary(data))
 
