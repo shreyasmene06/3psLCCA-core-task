@@ -1,0 +1,2337 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+\allowdisplaybreaks
+\begin{document}
+\title{Life Cycle Cost Analysis Report}
+\author{3psLCCA Engine}
+\date{\today}
+\maketitle
+\section*{Project Parameters}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Service Life Years & 75 \\
+Analysis Period Years & 150 \\
+Discount Rate Percent & 6.7 \\
+Inflation Rate Percent & 5.15 \\
+Interest Rate Percent & 7.75 \\
+Currency Conversion & 88.73 \\
+\bottomrule
+\end{tabularx}
+\section*{Construction Cost Inputs}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Construction Input & Value \\
+\midrule
+Initial Construction Cost & 12,843,979.44 \\
+Initial Carbon Emissions Cost & 2,065,434.91 \\
+Superstructure Construction Cost & 9,356,038.92 \\
+Total Scrap Value & 2,164,095.02 \\
+\bottomrule
+\end{tabularx}
+\section{Initial Stage}
+\subsection{Summary}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Component & Value \\
+\midrule
+Economic: Initial Construction Cost & 12,843,979.44 \\
+Economic: Time Cost Of Loan & 215,671.82 \\
+Environmental: Initial Material Carbon Emission Cost & 2,065,434.91 \\
+Environmental: Initial Vehicular Emission Cost & 923,557.7 \\
+Social: Initial Road User Cost & 20,064,546.22 \\
+\bottomrule
+\end{tabularx}
+\subsection{Economic}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Initial Construction Cost & 12,843,979.44 \\
+Time Cost Of Loan & 215,671.82 \\
+\bottomrule
+\end{tabularx}
+\subsection{Environmental}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Initial Material Carbon Emission Cost & 2,065,434.91 \\
+Initial Vehicular Emission Cost & 923,557.7 \\
+\bottomrule
+\end{tabularx}
+\subsection{Social}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Initial Road User Cost & 20,064,546.22 \\
+\bottomrule
+\end{tabularx}
+\section{Use Stage}
+\subsection{Summary}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Component & Value \\
+\midrule
+Economic: Routine Inspection Costs & 762,521.37 \\
+Economic: Periodic Maintenance & 789,281.8 \\
+Economic: Major Inspection Costs & 717,528.91 \\
+Economic: Major Repair Cost & 2,920,720.92 \\
+Economic: Replacement Costs For Bearing And Expansion Joint & 1,817,410.56 \\
+Environmental: Periodic Carbon Costs & 126,924.07 \\
+Environmental: Major Repair Material Carbon Emission Costs & 25,832.39 \\
+Environmental: Major Repair Vehicular Emission Costs & 1,211,636.67 \\
+Environmental: Vehicular Emission Costs For Replacement Of Bearing And Expansion Joint & 18,400.11 \\
+Social: Major Repair Road User Costs & 26,323,141.21 \\
+Social: Road User Costs For Replacement Of Bearing And Expansion Joint & 399,747.5 \\
+\bottomrule
+\end{tabularx}
+\subsection{Economic}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Routine Inspection Costs & 762,521.37 \\
+Periodic Maintenance & 789,281.8 \\
+Major Inspection Costs & 717,528.91 \\
+Major Repair Cost & 2,920,720.92 \\
+Replacement Costs For Bearing And Expansion Joint & 1,817,410.56 \\
+\bottomrule
+\end{tabularx}
+\subsection{Environmental}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Periodic Carbon Costs & 126,924.07 \\
+Major Repair Material Carbon Emission Costs & 25,832.39 \\
+Major Repair Vehicular Emission Costs & 1,211,636.67 \\
+Vehicular Emission Costs For Replacement Of Bearing And Expansion Joint & 18,400.11 \\
+\bottomrule
+\end{tabularx}
+\subsection{Social}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Major Repair Road User Costs & 26,323,141.21 \\
+Road User Costs For Replacement Of Bearing And Expansion Joint & 399,747.5 \\
+\bottomrule
+\end{tabularx}
+\section{Reconstruction}
+\subsection{Summary}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Component & Value \\
+\midrule
+Economic: Total Demolition And Disposal Costs & 425,135.72 \\
+Economic: Cost Of Reconstruction After Demolition & 4,251,357.19 \\
+Economic: Total Scrap Value & 716,315.45 \\
+Economic: Time Cost Of Loan & 71,387.37 \\
+Environmental: Carbon Costs Demolition And Disposal & 68,365.9 \\
+Environmental: Carbon Cost Of Reconstruction After Demolition & 683,658.96 \\
+Environmental: Demolition Vehicular Emission Cost & 58,788 \\
+Environmental: Reconstruction Vehicular Emission Cost & 305,697.6 \\
+Social: Ruc Demolition & 1,277,185.54 \\
+Social: Ruc Reconstruction & 6,641,364.8 \\
+\bottomrule
+\end{tabularx}
+\subsection{Economic}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Demolition And Disposal Costs & 425,135.72 \\
+Cost Of Reconstruction After Demolition & 4,251,357.19 \\
+Total Scrap Value & 716,315.45 \\
+Time Cost Of Loan & 71,387.37 \\
+\bottomrule
+\end{tabularx}
+\subsection{Environmental}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Carbon Costs Demolition And Disposal & 68,365.9 \\
+Carbon Cost Of Reconstruction After Demolition & 683,658.96 \\
+Demolition Vehicular Emission Cost & 58,788 \\
+Reconstruction Vehicular Emission Cost & 305,697.6 \\
+\bottomrule
+\end{tabularx}
+\subsection{Social}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Ruc Demolition & 1,277,185.54 \\
+Ruc Reconstruction & 6,641,364.8 \\
+\bottomrule
+\end{tabularx}
+\section{End-of-Life Stage}
+\subsection{Summary}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Component & Value \\
+\midrule
+Economic: Total Demolition And Disposal Costs & 142,568.17 \\
+Economic: Total Scrap Value & 240,214.55 \\
+Environmental: Carbon Costs Demolition And Disposal & 22,926.33 \\
+Environmental: Demolition Vehicular Emission Cost & 19,714.4 \\
+Social: Ruc Demolition & 428,300.89 \\
+\bottomrule
+\end{tabularx}
+\subsection{Economic}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Demolition And Disposal Costs & 142,568.17 \\
+Total Scrap Value & 240,214.55 \\
+\bottomrule
+\end{tabularx}
+\subsection{Environmental}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Carbon Costs Demolition And Disposal & 22,926.33 \\
+Demolition Vehicular Emission Cost & 19,714.4 \\
+\bottomrule
+\end{tabularx}
+\subsection{Social}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Ruc Demolition & 428,300.89 \\
+\bottomrule
+\end{tabularx}
+\section{Detailed Calculations}
+\subsection{Initial Stage Detailed Calculations}
+\subsubsection{Formulae}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Initial Construction Cost & initial\_construction\_cost \\
+Initial Material Carbon Emission Cost & initial\_carbon\_cost \\
+Initial Road User Cost & calculated based on construction duration and daily road user cost \\
+Initial Vehicular Emission Cost & calculated based on construction duration and daily vehicular emission cost \\
+Time Cost Of Loan & calculated based on initial construction cost, loan interest rate, and construction period \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Inputs}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Initial Construction Cost & 12,843,979.44 \\
+Initial Carbon Cost & 2,065,434.91 \\
+Construction Period In Years & 0.43 \\
+Days Per Month & 30 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Computed Values}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Initial Road User Cost & 20,064,546.22 \\
+Initial Vehicular Emission Cost & 923,557.7 \\
+Time Cost Of Loan & 215,671.82 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Road User Cost Breakdown}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Daily Ruc & 128,618.89 \\
+Duration Days & 156 \\
+Spwf Applied & 1 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Total Time Cost Of Loan}
+\textbf{Time Cost Of Loan}
+
+This calculates time cost of loan.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{loan} &= C_0 \times r \times t_c \times I \times SPWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{loan} &= 12\,843\,979.44 \times 0.08 \times 0.43 \times 0.5 \times 1
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{loan} &= 215\,671.82
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{loan}$ & Time Cost Of Loan \\
+$C_0$ & Initial Cost Of Construction \\
+$r$ & Interest Rate \\
+$t_c$ & Time For Construction Years \\
+$I$ & Investment Ratio \\
+$SPWF$ & Sum Of Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Interest Rate & 0.08 \\
+Time For Construction Years & 0.43 \\
+Investment Ratio & 0.5 \\
+Sum Of Present Worth Factor & 1 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Time Cost Of Loan & 215,671.82 \\
+\bottomrule
+\end{tabularx}
+\subsection{Use Stage Detailed Calculations}
+\subsubsection{Routine Inspection Costs}
+\textbf{Breakdown}
+
+\textbf{Routine Inspection Cost Per Year}
+
+This calculates the annual routine inspection cost before discounting.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{ri,y} &= \frac{C_0 \times p_{c,y}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{ri,y} &= \frac{12\,843\,979.44 \times 0.1}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{ri,y} &= 12\,843.98
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{ri,y}$ & Routine Inspection Cost Per Year \\
+$C_0$ & Initial Cost Of Construction \\
+$p_{c,y}$ & Percentage Of Initial Construction Cost Per Year \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Routine Inspection Costs}
+
+This converts routine inspection costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RIC &= C_{ri,y} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RIC &= C_{ri,y} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$RIC$ & Present Value Of Routine Inspection Costs \\
+$C_{ri,y}$ & Routine Inspection Cost Per Year \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Percentage Of Initial Construction Cost Per Year & 0.1 \\
+Interval In Years & 1 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Routine Inspection Cost Per Year & 12,843.98 \\
+Sum Of Present Worth Factor & 59.37 \\
+\bottomrule
+\end{tabularx}
+\textbf{Sum Of Present Worth Factor Breakdown}
+
+\textbf{Breakdown}
+
+\textbf{Year To Pwf}
+
+\begin{longtable}{p{0.43\linewidth} p{0.49\linewidth}}
+\toprule
+Parameter & Value \\
+\midrule
+\endfirsthead
+\toprule
+Parameter & Value \\
+\midrule
+\endhead
+1.43 & 0.98 \\
+2.43 & 0.96 \\
+3.43 & 0.95 \\
+4.43 & 0.94 \\
+5.43 & 0.92 \\
+6.43 & 0.91 \\
+7.43 & 0.9 \\
+8.43 & 0.88 \\
+9.43 & 0.87 \\
+10.43 & 0.86 \\
+11.43 & 0.85 \\
+12.43 & 0.83 \\
+13.43 & 0.82 \\
+14.43 & 0.81 \\
+15.43 & 0.8 \\
+16.43 & 0.79 \\
+17.43 & 0.78 \\
+18.43 & 0.76 \\
+19.43 & 0.75 \\
+20.43 & 0.74 \\
+21.43 & 0.73 \\
+22.43 & 0.72 \\
+23.43 & 0.71 \\
+24.43 & 0.7 \\
+25.43 & 0.69 \\
+26.43 & 0.68 \\
+27.43 & 0.67 \\
+28.43 & 0.66 \\
+29.43 & 0.65 \\
+30.43 & 0.64 \\
+31.43 & 0.63 \\
+32.43 & 0.62 \\
+33.43 & 0.61 \\
+34.43 & 0.6 \\
+35.43 & 0.59 \\
+36.43 & 0.59 \\
+37.43 & 0.58 \\
+38.43 & 0.57 \\
+39.43 & 0.56 \\
+40.43 & 0.55 \\
+41.43 & 0.55 \\
+42.43 & 0.54 \\
+43.43 & 0.53 \\
+44.43 & 0.52 \\
+45.43 & 0.51 \\
+46.43 & 0.51 \\
+47.43 & 0.5 \\
+48.43 & 0.49 \\
+49.43 & 0.48 \\
+50.43 & 0.48 \\
+51.43 & 0.47 \\
+52.43 & 0.46 \\
+53.43 & 0.46 \\
+54.43 & 0.45 \\
+55.43 & 0.44 \\
+56.43 & 0.44 \\
+57.43 & 0.43 \\
+58.43 & 0.42 \\
+59.43 & 0.42 \\
+60.43 & 0.41 \\
+61.43 & 0.41 \\
+62.43 & 0.4 \\
+63.43 & 0.4 \\
+64.43 & 0.39 \\
+65.43 & 0.38 \\
+66.43 & 0.38 \\
+67.43 & 0.37 \\
+68.43 & 0.37 \\
+69.43 & 0.36 \\
+70.43 & 0.36 \\
+71.43 & 0.35 \\
+72.43 & 0.35 \\
+73.43 & 0.34 \\
+74.43 & 0.34 \\
+76.87 & 0.33 \\
+77.87 & 0.32 \\
+78.87 & 0.32 \\
+79.87 & 0.31 \\
+80.87 & 0.31 \\
+81.87 & 0.3 \\
+82.87 & 0.3 \\
+83.87 & 0.29 \\
+84.87 & 0.29 \\
+85.87 & 0.28 \\
+86.87 & 0.28 \\
+87.87 & 0.28 \\
+88.87 & 0.27 \\
+89.87 & 0.27 \\
+90.87 & 0.27 \\
+91.87 & 0.26 \\
+92.87 & 0.26 \\
+93.87 & 0.25 \\
+94.87 & 0.25 \\
+95.87 & 0.25 \\
+96.87 & 0.24 \\
+97.87 & 0.24 \\
+98.87 & 0.23 \\
+99.87 & 0.23 \\
+100.87 & 0.23 \\
+101.87 & 0.23 \\
+102.87 & 0.22 \\
+103.87 & 0.22 \\
+104.87 & 0.22 \\
+105.87 & 0.21 \\
+106.87 & 0.21 \\
+107.87 & 0.21 \\
+108.87 & 0.2 \\
+109.87 & 0.2 \\
+110.87 & 0.2 \\
+111.87 & 0.2 \\
+112.87 & 0.19 \\
+113.87 & 0.19 \\
+114.87 & 0.19 \\
+115.87 & 0.18 \\
+116.87 & 0.18 \\
+117.87 & 0.18 \\
+118.87 & 0.18 \\
+119.87 & 0.17 \\
+120.87 & 0.17 \\
+121.87 & 0.17 \\
+122.87 & 0.17 \\
+123.87 & 0.16 \\
+124.87 & 0.16 \\
+125.87 & 0.16 \\
+126.87 & 0.16 \\
+127.87 & 0.15 \\
+128.87 & 0.15 \\
+129.87 & 0.15 \\
+130.87 & 0.15 \\
+131.87 & 0.14 \\
+132.87 & 0.14 \\
+133.87 & 0.14 \\
+134.87 & 0.14 \\
+135.87 & 0.14 \\
+136.87 & 0.14 \\
+137.87 & 0.13 \\
+138.87 & 0.13 \\
+139.87 & 0.13 \\
+140.87 & 0.13 \\
+141.87 & 0.12 \\
+142.87 & 0.12 \\
+143.87 & 0.12 \\
+144.87 & 0.12 \\
+145.87 & 0.12 \\
+146.87 & 0.12 \\
+147.87 & 0.12 \\
+148.87 & 0.11 \\
+149.87 & 0.11 \\
+\bottomrule
+\end{longtable}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Construction Period & 0.43 \\
+Service Life & 75 \\
+Interval & 1 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 59.37 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Routine Inspection Costs & 762,521.37 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 762,521.37 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Routine Maintenance And Carbon Costs}
+\textbf{Breakdown}
+
+\textbf{Routine Maintenance Cost Per Year}
+
+This calculates the annual routine maintenance cost before discounting.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{pm,y} &= \frac{C_0 \times p_{c,y}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{pm,y} &= \frac{12\,843\,979.44 \times 0.55}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{pm,y} &= 70\,641.89
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{pm,y}$ & Routine Maintenance Cost Per Year \\
+$C_0$ & Initial Cost Of Construction \\
+$p_{c,y}$ & Percentage Of Initial Construction Cost Per Year \\
+\bottomrule
+\end{tabularx}
+\textbf{Routine Carbon Cost Per Year}
+
+This calculates the annual routine carbon cost before discounting.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{pm,CO_2,y} &= \frac{C_{CO_2,0} \times p_{CO_2}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{pm,CO_2,y} &= \frac{2\,065\,434.91 \times 0.55}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{pm,CO_2,y} &= 11\,359.89
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{pm,CO_2,y}$ & Routine Carbon Cost Per Year \\
+$C_{CO_2,0}$ & Cost Of Initial Carbon Emissions In \\
+$p_{CO_2}$ & Percentage Of Initial Cabron Emission Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Routine Maintenance Costs}
+
+This converts routine maintenance costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RMC &= C_{pm,y} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RMC &= C_{pm,y} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$RMC$ & Present Value Of Routine Maintenance Costs \\
+$C_{pm,y}$ & Routine Maintenance Cost Per Year \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Routine Carbon Costs}
+
+This converts routine carbon costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RCC &= C_{pm,CO_2,y} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RCC &= C_{pm,CO_2,y} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$RCC$ & Present Value Of Routine Carbon Costs \\
+$C_{pm,CO_2,y}$ & Routine Carbon Cost Per Year \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Cost Of Initial Carbon Emissions In & 2,065,434.91 \\
+Percentage Of Initial Construction Cost Per Year & 0.55 \\
+Percentage Of Initial Cabron Emission Cost & 0.55 \\
+Interval In Years & 5 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Routine Maintenance Cost Per Year & 70,641.89 \\
+Routine Carbon Cost Per Year & 11,359.89 \\
+Sum Of Present Worth Factor & 11.17 \\
+\bottomrule
+\end{tabularx}
+\textbf{Sum Of Present Worth Factor Breakdown}
+
+\textbf{Breakdown}
+
+\textbf{Year To Pwf}
+
+\begin{longtable}{p{0.43\linewidth} p{0.49\linewidth}}
+\toprule
+Parameter & Value \\
+\midrule
+\endfirsthead
+\toprule
+Parameter & Value \\
+\midrule
+\endhead
+5.43 & 0.92 \\
+10.43 & 0.86 \\
+15.43 & 0.8 \\
+20.43 & 0.74 \\
+25.43 & 0.69 \\
+30.43 & 0.64 \\
+35.43 & 0.59 \\
+40.43 & 0.55 \\
+45.43 & 0.51 \\
+50.43 & 0.48 \\
+55.43 & 0.44 \\
+60.43 & 0.41 \\
+65.43 & 0.38 \\
+70.43 & 0.36 \\
+80.87 & 0.31 \\
+85.87 & 0.28 \\
+90.87 & 0.27 \\
+95.87 & 0.25 \\
+100.87 & 0.23 \\
+105.87 & 0.21 \\
+110.87 & 0.2 \\
+115.87 & 0.18 \\
+120.87 & 0.17 \\
+125.87 & 0.16 \\
+130.87 & 0.15 \\
+135.87 & 0.14 \\
+140.87 & 0.13 \\
+145.87 & 0.12 \\
+\bottomrule
+\end{longtable}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Construction Period & 0.43 \\
+Service Life & 75 \\
+Interval & 5 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 11.17 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Routine Maintenance Costs & 789,281.8 \\
+Total Routine Carbon Costs & 126,924.07 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Maintenance Costs & 789,281.8 \\
+Total Carbon Costs & 126,924.07 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Major Inspection Costs}
+\textbf{Breakdown}
+
+\textbf{Major Inspection Cost}
+
+This calculates major inspection cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{mi} &= \frac{C_0 \times p_c}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{mi} &= \frac{12\,843\,979.44 \times p_c}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{mi} &= 64\,219.9
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{mi}$ & Major Inspection Cost \\
+$C_0$ & Initial Cost Of Construction \\
+$p_c$ & Percentage Of Initial Construction Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Major Inspection Costs}
+
+This converts major inspection costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MIC &= C_{mi} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MIC &= C_{mi} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$MIC$ & Present Value Of Major Inspection Costs \\
+$C_{mi}$ & Major Inspection Cost \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Percentage Of Initial Construction Cost For Inspection & 0.5 \\
+Interval For Repair And Rehabitation In Years For Inspection & 5 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Major Inspection Cost & 64,219.9 \\
+Sum Of Present Worth Factor For Inspection & 11.17 \\
+\bottomrule
+\end{tabularx}
+\textbf{Major Inspection Present Worth Factor Breakdown}
+
+\textbf{Breakdown}
+
+\textbf{Year To Pwf}
+
+\begin{longtable}{p{0.43\linewidth} p{0.49\linewidth}}
+\toprule
+Parameter & Value \\
+\midrule
+\endfirsthead
+\toprule
+Parameter & Value \\
+\midrule
+\endhead
+5.43 & 0.92 \\
+10.43 & 0.86 \\
+15.43 & 0.8 \\
+20.43 & 0.74 \\
+25.43 & 0.69 \\
+30.43 & 0.64 \\
+35.43 & 0.59 \\
+40.43 & 0.55 \\
+45.43 & 0.51 \\
+50.43 & 0.48 \\
+55.43 & 0.44 \\
+60.43 & 0.41 \\
+65.43 & 0.38 \\
+70.43 & 0.36 \\
+80.87 & 0.31 \\
+85.87 & 0.28 \\
+90.87 & 0.27 \\
+95.87 & 0.25 \\
+100.87 & 0.23 \\
+105.87 & 0.21 \\
+110.87 & 0.2 \\
+115.87 & 0.18 \\
+120.87 & 0.17 \\
+125.87 & 0.16 \\
+130.87 & 0.15 \\
+135.87 & 0.14 \\
+140.87 & 0.13 \\
+145.87 & 0.12 \\
+\bottomrule
+\end{longtable}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Construction Period & 0.43 \\
+Service Life & 75 \\
+Interval & 5 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 11.17 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Major Inspection Costs & 717,528.91 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Major Repair Carbon And Road User Costs}
+\textbf{Breakdown}
+
+\textbf{Major Repair Cost}
+
+This calculates major repair cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MR &= \frac{C_0 \times p_c}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MR &= \frac{12\,843\,979.44 \times p_c}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MR &= 1\,284\,397.94
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$MR$ & Major Repair Cost \\
+$C_0$ & Initial Cost Of Construction \\
+$p_c$ & Percentage Of Initial Construction Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Major Repair Carbon Cost}
+
+This calculates major repair carbon cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRC &= \frac{C_{CO_2,0} \times p_{CO_2}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRC &= \frac{2\,065\,434.91 \times 0.55}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRC &= 11\,359.89
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$MRC$ & Major Repair Carbon Cost \\
+$C_{CO_2,0}$ & Cost Of Initial Carbon Emissions In \\
+$p_{CO_2}$ & Percentage Of Initial Carbon Emission Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Major Repair Costs}
+
+This converts major repair costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRC &= MR \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRC &= MR \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$MRC$ & Present Value Of Major Repair Costs \\
+$MR$ & Major Repair Cost \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Major Repair Carbon Costs}
+
+This converts major repair carbon costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRCC &= MRC \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+MRCC &= MRC \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$MRCC$ & Present Value Of Major Repair Carbon Costs \\
+$MRC$ & Major Repair Carbon Cost \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Road User Cost}
+
+This calculates road user cost.
+
+\textit{Formula note.} calculated based on disruption duration and daily road user cost.
+
+\textit{Result.} Road User Cost = 26,323,141.21.
+
+\textbf{Vehicular Emission Cost}
+
+This calculates vehicular emission cost.
+
+\textit{Formula note.} calculated based on disruption duration and daily vehicular emission cost.
+
+\textit{Result.} Vehicular Emission Cost = 1,211,636.67.
+
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Cost Of Initial Carbon Emissions In & 2,065,434.91 \\
+Percentage Of Initial Construction Cost For Repair & 10 \\
+Percentage Of Initial Carbon Emission Cost & 0.55 \\
+Interval For Repair And Rehabitation In Years For Repair & 20 \\
+Repairs Duration Months & 3 \\
+Disruption Days & 90 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Major Repair Cost & 1,284,397.94 \\
+Major Repair Carbon Cost & 11,359.89 \\
+Sum Of Present Worth Factor For Repair & 2.27 \\
+Road User Cost & 26,323,141.21 \\
+Vehicular Emission Cost & 1,211,636.67 \\
+\bottomrule
+\end{tabularx}
+\textbf{Major Repair Present Worth Factor Breakdown}
+
+\textbf{Breakdown}
+
+\textbf{Year To Pwf}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+20.43 & 0.74 \\
+40.43 & 0.55 \\
+60.43 & 0.41 \\
+95.87 & 0.25 \\
+115.87 & 0.18 \\
+135.87 & 0.14 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Construction Period & 0.43 \\
+Service Life & 75 \\
+Interval & 20 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 2.27 \\
+\bottomrule
+\end{tabularx}
+\textbf{Road User Cost Breakdown}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Daily Ruc & 128,618.89 \\
+Duration Days & 90 \\
+Spwf Applied & 2.27 \\
+\bottomrule
+\end{tabularx}
+\textbf{Sum Of Present Worth Factor Breakdown}
+
+\textbf{Breakdown}
+
+\textbf{Year To Pwf}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+20.43 & 0.74 \\
+40.43 & 0.55 \\
+60.43 & 0.41 \\
+95.87 & 0.25 \\
+115.87 & 0.18 \\
+135.87 & 0.14 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Construction Period & 0.43 \\
+Service Life & 75 \\
+Interval & 20 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 2.27 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Major Repair Costs & 2,920,720.92 \\
+Total Major Repair Carbon Costs & 25,832.39 \\
+Total Major Repair Road User Costs & 26,323,141.21 \\
+Total Major Repair Vehicular Emission Costs & 1,211,636.67 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Replacement Costs For Bearing And Expansion Joint}
+\textbf{Breakdown}
+
+\textbf{Replacement Cost}
+
+This calculates replacement cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{rep} &= \frac{C_{ss} \times p_{ss}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{rep} &= \frac{9\,356\,038.92 \times 12.5}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{rep} &= 1\,169\,504.86
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{rep}$ & Replacement Cost \\
+$C_{ss}$ & Cost Of Super Structure \\
+$p_{ss}$ & Percentage Of Super Structure Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Replacement Costs}
+
+This converts replacement costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RC &= C_{rep} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RC &= C_{rep} \times PWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$RC$ & Present Value Of Replacement Costs \\
+$C_{rep}$ & Replacement Cost \\
+$PWF$ & Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Road User Cost}
+
+This calculates road user cost.
+
+\textit{Formula note.} calculated based on duration of replacement and daily road user cost.
+
+\textit{Result.} Road User Cost = 399,747.5.
+
+\textbf{Vehicular Emission Cost}
+
+This calculates vehicular emission cost.
+
+\textit{Formula note.} calculated based on duration of replacement and daily vehicular emission cost.
+
+\textit{Result.} Vehicular Emission Cost = 18,400.11.
+
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Cost Of Super Structure & 9,356,038.92 \\
+Percentage Of Super Structure Cost & 12.5 \\
+Interval For Replacement In Years & 25 \\
+Duration Of Replacement In Days & 2 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Replacement Cost & 1,169,504.86 \\
+Sum Of Present Worth Factor For Replacement & 1.55 \\
+Road User Cost & 399,747.5 \\
+Vehicular Emission Cost & 18,400.11 \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Worth Factor Breakdown}
+
+\textbf{Breakdown}
+
+\textbf{Year To Pwf}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+25.43 & 0.69 \\
+50.43 & 0.48 \\
+100.87 & 0.23 \\
+125.87 & 0.16 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Construction Period & 0.43 \\
+Service Life & 75 \\
+Interval & 25 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total & 1.55 \\
+\bottomrule
+\end{tabularx}
+\textbf{Road User Cost Breakdown}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Daily Ruc & 128,618.89 \\
+Duration Days & 2 \\
+Spwf Applied & 1.55 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Total Replacement Costs & 1,817,410.56 \\
+Total Replacement Road User Costs & 399,747.5 \\
+Total Replacement Vehicular Emission Costs & 18,400.11 \\
+\bottomrule
+\end{tabularx}
+\subsection{Reconstruction Detailed Calculations}
+\subsubsection{Present Worth Factor For Demolition}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+75.52 & 0.33 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Demolition And Disposal Breakdown}
+\textbf{Demolition Cost}
+
+This calculates demolition cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{demo} &= \frac{C_0 \times p_c}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{demo} &= \frac{12\,843\,979.44 \times 10}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{demo} &= 1\,284\,397.94
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{demo}$ & Demolition Cost \\
+$C_0$ & Initial Cost Of Construction \\
+$p_c$ & Percentage Of Initial Construction Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Demolition Carbon Cost}
+
+This calculates demolition carbon cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{CO_2,demo} &= \frac{C_{CO_2,0} \times p_{CO_2}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{CO_2,demo} &= \frac{2\,065\,434.91 \times 10}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{CO_2,demo} &= 206\,543.49
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{CO_2,demo}$ & Demolition Carbon Cost \\
+$C_{CO_2,0}$ & Cost Of Initial Carbon Emissions In \\
+$p_{CO_2}$ & Percentage Of Initial Carbon Emission Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Cost Of Reconstruction After Demolition}
+
+This calculates cost of reconstruction after demolition.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{recon} &= C_0
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{recon} &= 12\,843\,979.44
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{recon}$ & Cost Of Reconstruction After Demolition \\
+$C_0$ & Initial Cost Of Construction \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Demolition Costs}
+
+This converts demolition costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DC &= C_{demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DC &= C_{demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$DC$ & Present Value Of Demolition Costs \\
+$C_{demo}$ & Demolition Cost \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Demolition Carbon Costs}
+
+This converts demolition carbon costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DCC &= C_{CO_2,demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DCC &= C_{CO_2,demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$DCC$ & Present Value Of Demolition Carbon Costs \\
+$C_{CO_2,demo}$ & Demolition Carbon Cost \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Reconstruction Costs}
+
+This converts reconstruction costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RC &= C_0 \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RC &= 12\,843\,979.44 \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$RC$ & Present Value Of Reconstruction Costs \\
+$C_0$ & Initial Cost Of Construction \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Cost Of Initial Carbon Emissions In & 2,065,434.91 \\
+Percentage Of Initial Construction Cost & 10 \\
+Percentage Of Initial Carbon Emission Cost & 10 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Demolition Cost & 1,284,397.94 \\
+Demolition Carbon Cost & 206,543.49 \\
+Demolition Spwi & 0.33 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Road User And Vehicular Emission Costs Breakdown}
+\textbf{Demolition Road User Cost Breakdown}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Daily Ruc & 128,618.89 \\
+Duration Days & 30 \\
+Spwf Applied & 0.33 \\
+\bottomrule
+\end{tabularx}
+\textbf{Demolition Vehicular Emission Cost Breakdown}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Daily Ruc & 128,618.89 \\
+Duration Days & 30 \\
+Spwf Applied & 0.33 \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Demolition Road User Cost & 1,277,185.54 \\
+Demolition Vehicular Emission Cost & 58,788 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Reconstruction Costs Breakdown}
+\textbf{Present Value Of Construction Costs}
+
+This converts construction costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+CC &= C_0 \times SPWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+CC &= 12\,843\,979.44 \times 0.33
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+CC &= 4\,251\,357.19
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$CC$ & Present Value Of Construction Costs \\
+$C_0$ & Initial Cost Of Construction \\
+$SPWF$ & Sum Of Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Carbon Costs}
+
+This converts carbon costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+CC &= C_{CO_2,0} \times SPWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+CC &= 2\,065\,434.91 \times 0.33
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+CC &= 683\,658.96
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$CC$ & Present Value Of Carbon Costs \\
+$C_{CO_2,0}$ & Cost Of Initial Carbon Emissions In \\
+$SPWF$ & Sum Of Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Cost Of Initial Carbon Emissions In & 2,065,434.91 \\
+Sum Of Present Worth Factor & 0.33 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Present Value Of Construction Costs & 4,251,357.19 \\
+Present Value Of Carbon Costs & 683,658.96 \\
+Construction Road User Cost & 6,641,364.8 \\
+Construction Vehicular Emission Cost & 305,697.6 \\
+Construction Road User Cost Breakdown & \{'daily\_ruc': 128618.89, 'duration\_days': 156, 'spwf\_applied': 0.331\} \\
+Construction Vehicular Emission Cost Breakdown & \{'daily\_ruc': 128618.89, 'duration\_days': 156, 'spwf\_applied': 0.331\} \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Total Demolition And Disposal Costs}
+425,135.72
+\subsubsection{Total Demolition And Disposal Carbon Costs}
+68,365.9
+\subsubsection{Cost Of Reconstruction After Demolition}
+4,251,357.19
+\subsubsection{Carbon Cost Of Reconstruction After Demolition}
+683,658.96
+\subsubsection{Ruc Demolition}
+1,277,185.54
+\subsubsection{Ruc Reconstruction}
+6,641,364.8
+\subsubsection{Demolition Vehicular Emission Cost}
+58,788
+\subsubsection{Reconstruction Vehicular Emission Cost}
+305,697.6
+\subsubsection{Time Cost Of Loan}
+\textbf{Time Cost Of Loan}
+
+This calculates time cost of loan.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{loan} &= C_0 \times r \times t_c \times I \times SPWF
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{loan} &= 12\,843\,979.44 \times 0.08 \times 0.43 \times 0.5 \\
+&\qquad \times 0.33
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{loan} &= 71\,387.37
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{loan}$ & Time Cost Of Loan \\
+$C_0$ & Initial Cost Of Construction \\
+$r$ & Interest Rate \\
+$t_c$ & Time For Construction Years \\
+$I$ & Investment Ratio \\
+$SPWF$ & Sum Of Present Worth Factor \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Interest Rate & 0.08 \\
+Time For Construction Years & 0.43 \\
+Investment Ratio & 0.5 \\
+Sum Of Present Worth Factor & 0.33 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Time Cost Of Loan & 71,387.37 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Total Scrap Value}
+\textbf{Total Scrap Value}
+
+This calculates total scrap value.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+SCRA &= S \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+SCRA &= 716\,315.45
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$SCRA$ & Total Scrap Value \\
+$S$ & Total Scrap Cost \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textit{Note.} This value is negative as it represents a salvage value..
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Value & 716,315.45 \\
+\bottomrule
+\end{tabularx}
+\subsection{End-of-Life Stage Detailed Calculations}
+\subsubsection{Present Worth Factor For Demolition}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+150 & 0.11 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Demolition And Disposal Breakdown}
+\textbf{Demolition Cost}
+
+This calculates demolition cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{demo} &= \frac{C_0 \times p_c}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{demo} &= \frac{12\,843\,979.44 \times 10}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{demo} &= 1\,284\,397.94
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{demo}$ & Demolition Cost \\
+$C_0$ & Initial Cost Of Construction \\
+$p_c$ & Percentage Of Initial Construction Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Demolition Carbon Cost}
+
+This calculates demolition carbon cost.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{CO_2,demo} &= \frac{C_{CO_2,0} \times p_{CO_2}}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{CO_2,demo} &= \frac{2\,065\,434.91 \times 10}{100}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{CO_2,demo} &= 206\,543.49
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{CO_2,demo}$ & Demolition Carbon Cost \\
+$C_{CO_2,0}$ & Cost Of Initial Carbon Emissions In \\
+$p_{CO_2}$ & Percentage Of Initial Carbon Emission Cost \\
+\bottomrule
+\end{tabularx}
+\textbf{Cost Of Reconstruction After Demolition}
+
+This calculates cost of reconstruction after demolition.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{recon} &= C_0
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+C_{recon} &= 12\,843\,979.44
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$C_{recon}$ & Cost Of Reconstruction After Demolition \\
+$C_0$ & Initial Cost Of Construction \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Demolition Costs}
+
+This converts demolition costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DC &= C_{demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DC &= C_{demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$DC$ & Present Value Of Demolition Costs \\
+$C_{demo}$ & Demolition Cost \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Demolition Carbon Costs}
+
+This converts demolition carbon costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DCC &= C_{CO_2,demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+DCC &= C_{CO_2,demo} \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$DCC$ & Present Value Of Demolition Carbon Costs \\
+$C_{CO_2,demo}$ & Demolition Carbon Cost \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textbf{Present Value Of Reconstruction Costs}
+
+This converts reconstruction costs into present-value terms using the applicable discounting factor.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RC &= C_0 \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Substitution}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+RC &= 12\,843\,979.44 \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$RC$ & Present Value Of Reconstruction Costs \\
+$C_0$ & Initial Cost Of Construction \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\textbf{Inputs}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Input & Value \\
+\midrule
+Initial Cost Of Construction & 12,843,979.44 \\
+Cost Of Initial Carbon Emissions In & 2,065,434.91 \\
+Percentage Of Initial Construction Cost & 10 \\
+Percentage Of Initial Carbon Emission Cost & 10 \\
+\bottomrule
+\end{tabularx}
+\textbf{Computed Values}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Computed Value & Result \\
+\midrule
+Demolition Cost & 1,284,397.94 \\
+Demolition Carbon Cost & 206,543.49 \\
+Demolition Spwi & 0.11 \\
+\bottomrule
+\end{tabularx}
+\subsubsection{Total Demolition And Disposal Costs}
+142,568.17
+\subsubsection{Total Demolition And Disposal Carbon Costs}
+22,926.33
+\subsubsection{Cost Of Reconstruction After Demolition}
+1,425,681.72
+\subsubsection{Ruc Demolition}
+428,300.89
+\subsubsection{Demolition Vehicular Emission Cost}
+19,714.4
+\subsubsection{Total Scrap Value}
+\textbf{Total Scrap Value}
+
+This calculates total scrap value.
+
+\textbf{Equation}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+SCRA &= S \times PWF_{demo}
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Result}
+
+\begin{center}
+\begin{adjustbox}{max width=\linewidth}
+$\displaystyle\begin{aligned}
+SCRA &= 240\,214.55
+\end{aligned}$
+\end{adjustbox}
+\end{center}
+\textbf{Abbreviations}
+
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Symbol & Meaning \\
+\midrule
+$SCRA$ & Total Scrap Value \\
+$S$ & Total Scrap Cost \\
+$PWF_{demo}$ & Demolition Spwi \\
+\bottomrule
+\end{tabularx}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Parameter & Value \\
+\midrule
+Value & 240,214.55 \\
+\bottomrule
+\end{tabularx}
+\section{Summary}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.43\linewidth} >{\raggedright\arraybackslash}X}
+\toprule
+Stage & Total \\
+\midrule
+Initial Stage & 36,113,190.09 \\
+Use Stage & 35,113,145.53 \\
+Reconstruction & 14,499,256.53 \\
+End-of-Life Stage & 853,724.34 \\
+Grand Total & 86,579,316.49 \\
+\bottomrule
+\end{tabularx}
+\end{document}

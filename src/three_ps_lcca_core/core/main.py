@@ -4,7 +4,13 @@ from .utils.input_validator import ironclad_validator
 from ..inputs.input_global import InputGlobalMetaData
 
 
-def run_full_lcc_analysis(input_data, construction_costs, debug=False):
+def run_full_lcc_analysis(
+    input_data,
+    construction_costs,
+    debug=False,
+    latex_report=False,
+    latex_output_path=None,
+):
     """
     Entry point for the OSDAG LCC module (global RUC mode only).
     Validates input, and computes Life Cycle Stage Costs using the
@@ -22,6 +28,8 @@ def run_full_lcc_analysis(input_data, construction_costs, debug=False):
         TypeError: If input_data is of an unexpected type.
         ValueError: If input fails validation or required fields are missing.
     """
+    if latex_report:
+        debug = True
 
     # --- 1. Normalise input_data to dict ---
     if isinstance(input_data, dict):
@@ -58,19 +66,20 @@ def run_full_lcc_analysis(input_data, construction_costs, debug=False):
     stage_params = input_data.get("maintenance_and_stage_parameters", {}).copy()
     stage_params["general"] = input_data.get("general_parameters", {})
 
-    construction_costs["daily_road_user_cost_with_vehicular_emissions"] = ruc_results
+    construction_cost_inputs = construction_costs.copy()
+    stage_program_inputs = construction_costs.copy()
+    stage_program_inputs["daily_road_user_cost_with_vehicular_emissions"] = ruc_results
 
     if debug:
         dump_to_file(
             "Stage_Cost_Calculator_Inputs.json",
-            {"stage_params": stage_params, "construction_costs": construction_costs},
+            {"stage_params": stage_params, "construction_costs": stage_program_inputs},
         )
         dump_to_file("A0_Validation_report.json", validation_report)
 
     # --- 7. Initialize and Run LCC Calculations ---
-    stage_calc = StageCostCalculator(stage_params, construction_costs, debug)
-
-    return {
+    stage_calc = StageCostCalculator(stage_params, stage_program_inputs, debug)
+    result = {
         "initial_stage": stage_calc.initial_cost_calculator(),
         "use_stage": stage_calc.use_stage_cost_calculator(),
         "reconstruction": stage_calc.reconstruction(),
@@ -78,3 +87,13 @@ def run_full_lcc_analysis(input_data, construction_costs, debug=False):
         "warnings": validation_report["warnings"],
         "notes": validation_report["info"],
     }
+    if latex_report:
+        from .latex.report import generate_latex_report
+
+        generate_latex_report(
+            result,
+            output_path=latex_output_path,
+            input_data=input_data,
+            construction_costs=construction_cost_inputs,
+        )
+    return result
