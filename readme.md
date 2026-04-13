@@ -1,181 +1,126 @@
-# Intern Screening Task - 3psLCCA LaTeX Report Generator
+# 3psLCCA LaTeX Report Generator
 
+## Project Overview
 
-## Objective
+This repository contains a Life Cycle Cost Analysis engine for bridge infrastructure and a report generation workflow that exports detailed computation output to LaTeX.
 
-The objective of this task is to extend the existing LCCA engine to generate a **comprehensive, human-readable LaTeX report** that clearly explains all lifecycle cost calculations.
+The implementation now supports structured report generation directly from the core analysis entry point with stage wise and formula wise traceability.
 
-The report should not only present results, but also:
+## Implementation Summary
 
-* Document every formula used
-* Explain the purpose of each calculation in plain English
-* Show all input values
-* Provide step-by-step derivations
-* Present final computed values in a structured format
+The following work has been completed.
 
-This ensures the output is suitable for **engineering review, auditing, and documentation purposes**.
+1. The core function `run_full_lcc_analysis()` was updated to support `latex_report` and `latex_output_path`.
+2. Internal debug mode is enabled automatically when `latex_report=True` so that breakdown data is always available for report creation.
+3. Debug JSON files are written only when `debug=True` is explicitly provided by the caller.
+4. A full LaTeX report generator was implemented in `src/three_ps_lcca_core/core/latex/report.py`.
+5. Tests were added and updated in `tests/test_main.py` and `tests/test_latex_report.py`.
+6. A sample generated report is available as `Example_Report.tex`.
 
-## Background
-
-3psLCCA is a Life Cycle Cost Analysis (LCCA) engine for bridge infrastructure. It calculates costs across four lifecycle stages: **initial construction**, **use (maintenance)**, **reconstruction**, and **end-of-life (demolition)**.
-
-The core entry point is `run_full_lcc_analysis()` in:
-
-```
-src/three_ps_lcca_core/core/main.py
-```
-
-The function currently accepts a `debug=True` flag. When enabled, each calculation step inside `StageCostCalculator` (in `stage_cost.py`) exposes a detailed breakdown dictionary containing:
-
-* `formulae` — the equations used
-* `inputs` — the raw values fed into each formula
-* `computed_values` — intermediate and final results
-
-Your task is to make use of these debug breakdowns to generate a structured **LaTeX report**.
-
----
-
-## Your Task
-
-Add a `latex_report` parameter to `run_full_lcc_analysis()` that, when set to `True`, generates a `.tex` file containing a well-structured LCCA report.
-
-### Function Signature (after your change)
+## Updated Core Function Signature
 
 ```python
 def run_full_lcc_analysis(
     input_data,
     construction_costs,
     debug=False,
-    latex_report=False,        # <-- add this
-    latex_output_path=None,    # <-- optional: where to save the file
+    latex_report=False,
+    latex_output_path=None,
 ):
 ```
 
-### Behaviour
+## Runtime Behavior
 
-| Parameter           | Value                  | Effect                                                     |
-| ------------------- | ---------------------- | ---------------------------------------------------------- |
-| `latex_report`      | `False` (default)      | No change — existing behaviour preserved                   |
-| `latex_report`      | `True`                 | Generates a `.tex` file and saves it to disk               |
-| `latex_output_path` | `None`                 | Save as `LCCA_Report.tex` in the current working directory |
-| `latex_output_path` | `"path/to/report.tex"` | Save to the specified path                                 |
+1. If `latex_report=False`, the function behaves as standard analysis mode.
+2. If `latex_report=True`, the function generates a LaTeX report file.
+3. If `latex_output_path=None`, output is written to `LCCA_Report.tex`.
+4. If `latex_output_path` is provided, output is written to the provided path.
+5. If `debug=False` and `latex_report=True`, breakdown data is still generated in memory for report building.
+6. If `debug=False`, debug JSON files are not dumped to the `debug` folder.
+7. If `debug=True`, debug JSON files are dumped as part of debug mode.
 
-**Important:** When `latex_report=True`, the function must internally enable `debug=True` (even if the caller did not set it) so that the breakdown data is available to build the report. The `debug` JSON dump behaviour should only trigger if the caller explicitly passed `debug=True`.
+## Generated Report Coverage
 
----
+The report generator covers all required sections and detailed computation content.
 
-## Additional Requirement (Detailed Explanation of Calculations)
+1. Title page with project parameters.
+2. Construction cost input table.
+3. Initial stage summary and detailed calculations.
+4. Use stage summary and detailed calculations.
+5. Reconstruction summary and present worth details.
+6. End of Life stage summary and detailed calculations.
+7. Final summary table with stage totals and grand total.
 
-The generated LaTeX report must not only display formulas and results, but also **clearly explain every equation and calculation step**.
+Detailed sections include formulas, plain language explanation, input values, substitutions, computed values, and symbol abbreviation tables where applicable.
 
-For every cost component across all stages, the report must include:
+## Key Source Files
 
-* The formula (in LaTeX format)
-* A brief plain-English explanation of what the formula represents
-* A list of input values used in the calculation
-* Substitution of actual values into the formula
-* Step-by-step breakdown of how the result is computed
-* The final computed value
+1. `src/three_ps_lcca_core/core/main.py`  
+   Analysis entry point and report mode orchestration.
+2. `src/three_ps_lcca_core/core/stage_cost/stage_cost.py`  
+   Stage level cost computation and debug payload generation.
+3. `src/three_ps_lcca_core/core/latex/report.py`  
+   LaTeX document construction, formula rendering, and section assembly.
+4. `src/examples/from_dict/example.py`  
+   Example execution script for report generation.
+5. `src/examples/from_dict/Input_global.py`  
+   Sample input dataset.
+6. `tests/test_main.py` and `tests/test_latex_report.py`  
+   Verification of report mode behavior and output structure.
 
-This applies to **all stages and all sub-components**, including:
+## System Architecture
 
-* Initial stage calculations
-* Use stage maintenance components
-* Reconstruction cycles
-* End-of-life costs
+![Untitled Diagram.drawio_3](/home/shreyas/Downloads/images/Untitled Diagram.drawio_3.png)
 
----
+### Architecture Description
 
-## Report Structure
+The architecture follows a layered execution model with a single orchestration entry point.
 
-The generated `.tex` file must compile with `pdflatex` without errors and contain the following sections, in order:
+1. Input and validation layer  
+   Input is accepted as a dictionary or `InputGlobalMetaData`, then validated and normalized through the input schema models and validator utilities.
 
-### 1. Title Page
+2. Orchestration layer  
+   `run_full_lcc_analysis()` in `core/main.py` controls the full workflow, builds stage parameters, and manages mode behavior through `requested_debug` and `internal_debug`.
 
-* Report title: **Life Cycle Cost Analysis Report**
-* Project parameters table: `service_life_years`, `analysis_period_years`, `discount_rate_percent`, `inflation_rate_percent`, `interest_rate_percent`, `currency_conversion`
+3. Computation layer  
+   `StageCostCalculator` in `core/stage_cost/stage_cost.py` computes the four lifecycle stages, uses present worth factor utilities for discounting, and prepares structured debug breakdown payloads.
 
-### 2. Construction Cost Inputs
+4. Reporting layer  
+   `core/latex/report.py` consumes final stage results and debug payloads to generate a professional `.tex` report with formulas, substitutions, computed values, and summary tables.
 
-* Table of the `construction_costs` dict passed to the function:
-  `initial_construction_cost`, `initial_carbon_emissions_cost`, `superstructure_construction_cost`, `total_scrap_value`
+5. Verification layer  
+   `tests/test_main.py` and `tests/test_latex_report.py` verify report mode behavior, debug file behavior, section ordering, and formula formatting output.
 
-### 3. Initial Stage
+Runtime flow:
 
-* Summary table of `initial_stage` results
-* Sub-section for each cost component (construction costs, time cost of loan, road user cost) with:
+```text
+Input Data -> run_full_lcc_analysis (main.py)
+          -> StageCostCalculator (stage_cost.py)
+          -> Stage Results + Debug Payloads
+          -> generate_latex_report (report.py, optional)
+          -> LCCA_Report.tex or custom output path
+```
 
-  * The formula used (from `breakdown["formulae"]`)
-  * Input values (from `breakdown["inputs"]`)
-  * Computed result
-  * **Detailed explanation and step-by-step derivation (as described above)**
+## How To Run
 
-### 4. Use Stage
-
-* Summary table of `use_stage` results
-* Sub-sections for routine inspection, periodic maintenance, major inspection, major repair, and bearing/expansion joint replacement
-* Each sub-section should list:
-
-  * Formula
-  * Inputs
-  * Result
-  * **Detailed explanation and step-by-step derivation**
-
-### 5. Reconstruction
-
-* Summary of reconstruction costs across cycles
-* Table with present worth factors and computed costs per reconstruction cycle
-* Include **explanation of discounting logic and step-by-step calculation of present worth values**
-
-### 6. End-of-Life Stage
-
-* Demolition, disposal, and scrap value costs
-* Formula and computed values
-* **Include full explanation and derivation steps**
-
-### 7. Summary
-
-* Final summary table with all four stage totals and a grand total
-
----
-
-
-## How to Run the Existing Example
-
-From the project root:
+1. Run the example analysis and generate report output.
 
 ```bash
 python -m src.examples.from_dict.example
 ```
 
-Study the output and the `debug` JSON files dumped (e.g., `A0_Core_Inputs.json`, `Stage_Cost_Calculator_Inputs.json`) to understand the data structure your report generator will consume.
+2. Run tests.
 
----
+```bash
+pytest -q
+```
 
-## Files to Read Before Starting
+## Expected Artifacts
 
-| File                                                   | Why                                               |
-| ------------------------------------------------------ | ------------------------------------------------- |
-| `src/three_ps_lcca_core/core/main.py`                  | Entry point — this is where you add the parameter |
-| `src/three_ps_lcca_core/core/stage_cost/stage_cost.py` | All calculations and debug breakdowns             |
-| `src/examples/from_dict/example.py`                    | Working example to test against                   |
-| `src/examples/from_dict/Input_global.py`               | Sample input in global RUC mode                   |
+1. `Example_Report.tex` generated by the example script.
+2. `LCCA_Report.tex` when default report output path is used.
+3. `debug/*.json` files only when debug mode is enabled.
 
----
-## Deliverables
+## Professional Documentation Notes
 
-Submit a single pull request (or zip of your changes) containing:
-
-* [ ] Modified `main.py` with the new `latex_report` and `latex_output_path` parameters
-* [ ] New file `src/three_ps_lcca_core/core/latex/report.py` (or equivalent module) containing the report generation logic
-* [ ] At least one test in `tests/`
-* [ ] A sample `LCCA_Report.tex` generated from `Input_global.py` (so we can see your output without running the code)
-* [ ] **Raise a Pull Request (PR)** with clear commit history and description of changes
-* [ ] **Submit a short video walkthrough (5–10 minutes)** explaining:
-
-  * Your approach
-  * Code structure
-  * How the LaTeX report is generated
-  * Sample output and key sections
-
----
+Use `Project_Report.tex` for submission style reporting with screenshot placeholders and narrative documentation.

@@ -1,0 +1,457 @@
+\documentclass[11pt]{article}
+
+% ── Encoding ──────────────────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ── Page layout ───────────────────────────────────────────────────────────────
+\usepackage[margin=1in, headheight=14pt]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{3psLCCA LaTeX Report Generator — Intern Screening Task}}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[C]{\small\textit{Prepared by Shreyas Mene}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Colour palette ────────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{navyblue}{RGB}{20, 50, 100}
+\definecolor{rowgray}{RGB}{245, 246, 248}
+\definecolor{rowwhite}{RGB}{255, 255, 255}
+\definecolor{codebg}{RGB}{248, 248, 248}
+
+% ── Tables ────────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+
+% ── Math ──────────────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% ── Lists ─────────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.8em, itemsep=0.25em, topsep=0.4em}
+\setlist[enumerate]{leftmargin=1.8em, itemsep=0.25em, topsep=0.4em}
+
+% ── Figures & captions ────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{font=small, labelfont={bf,color=navyblue}, labelsep=period, skip=5pt}
+
+% ── Section headings ──────────────────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}
+  {\large\bfseries\color{navyblue}}{\thesection}{0.8em}{}
+  [\vspace{-0.3em}\textcolor{navyblue}{\rule{\linewidth}{0.5pt}}]
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{navyblue!80!black}}{\thesubsection}{0.7em}{}
+\titlespacing*{\section}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.4em}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true, linkcolor=navyblue,
+  urlcolor=navyblue, citecolor=navyblue,
+  pdftitle={Intern Screening Task Report — 3psLCCA},
+  pdfauthor={Shreyas Mene}
+}
+
+% ── Code listings ─────────────────────────────────────────────────────────────
+\usepackage{listings}
+\lstset{
+  basicstyle=\small\ttfamily,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framesep=4pt,
+  rulecolor=\color{gray!35},
+  breaklines=true,
+  breakatwhitespace=true,
+  xleftmargin=8pt,
+  xrightmargin=4pt,
+}
+
+% ── Spacing ───────────────────────────────────────────────────────────────────
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% ── Column shorthands ─────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% header-row helper: colour text white+bold for header cells
+\newcommand{\hc}[1]{\color{white}\bfseries #1}
+
+% ── Screenshot placeholder ────────────────────────────────────────────────────
+\newcommand{\screenshotplaceholder}[2]{%
+\begin{figure}[H]
+  \centering
+  \fcolorbox{navyblue!40}{rowgray}{%
+    \begin{minipage}[c][0.26\textheight][c]{0.88\linewidth}
+      \centering
+      {\color{navyblue}\bfseries\large #1}\\[0.6em]
+      {\color{gray!80}\itshape #2}
+    \end{minipage}}
+  \caption{#1}
+\end{figure}}
+
+% =============================================================================
+\begin{document}
+
+% ── Title page ────────────────────────────────────────────────────────────────
+\begin{titlepage}
+  \pagecolor{navyblue}
+  \color{white}
+  \centering
+  \vspace*{3cm}
+
+  {\fontsize{26}{32}\bfseries\selectfont Intern Screening Task Report\par}
+  \vspace{0.5em}
+  {\fontsize{17}{24}\bfseries\selectfont 3psLCCA \LaTeX{} Report Generator\par}
+
+  \vspace{0.9em}
+  \textcolor{white!50}{\rule{0.5\linewidth}{0.5pt}}
+  \vspace{0.9em}
+
+  {\large Life Cycle Cost Analysis (LCCA) Engine\\[0.3em]
+   Implementation Summary\par}
+
+  \vfill
+
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{@{} L{3.5cm} L{7cm} @{}}
+    \textbf{Project:}      & 3psLCCA Core Task \\
+    \textbf{Repository:}   & \texttt{3psLCCA-core-task} \\
+    \textbf{Prepared by:}  & Shreyas Mene \\
+    \textbf{Date:}         & \today \\
+  \end{tabular}
+  \renewcommand{\arraystretch}{1}
+
+  \vspace{2.5cm}
+\end{titlepage}
+\nopagecolor
+
+% ── Table of Contents ─────────────────────────────────────────────────────────
+\tableofcontents
+\clearpage
+
+% =============================================================================
+\section{Task Context (From README)}
+
+\subsection{Objective}
+The task objective is to extend the existing 3psLCCA engine so it can generate a
+\textbf{comprehensive, human-readable \LaTeX{} report} that explains lifecycle cost
+calculations. The report is expected to:
+
+\begin{itemize}
+  \item Document every formula used.
+  \item Explain each calculation in plain English.
+  \item Show input values.
+  \item Show substitution and step-wise derivation.
+  \item Present final computed outputs in structured form.
+\end{itemize}
+
+\subsection{Background}
+The project analyses bridge lifecycle costs over four stages:
+\textbf{Initial}, \textbf{Use}, \textbf{Reconstruction}, and \textbf{End-of-Life}.
+The core entry point is:
+
+\begin{lstlisting}[language=Python]
+# src/three_ps_lcca_core/core/main.py
+run_full_lcc_analysis(...)
+\end{lstlisting}
+
+\screenshotplaceholder
+  {Task Statement Reference (Add Screenshot)}
+  {Insert screenshot of README objective and report-structure requirements.}
+
+% =============================================================================
+\section{Required Functional Change}
+
+\subsection{Function Signature Requirement}
+As required by the task, the analysis entry point supports:
+
+\begin{lstlisting}[language=Python]
+def run_full_lcc_analysis(
+    input_data,
+    construction_costs,
+    debug=False,
+    latex_report=False,
+    latex_output_path=None,
+):
+\end{lstlisting}
+
+\subsection{Behaviour Contract}
+
+\renewcommand{\arraystretch}{1.45}
+\begin{table}[H]
+  \centering
+  \caption{Parameter behaviour contract for \texttt{run\_full\_lcc\_analysis()}.}
+  \small
+  \begin{tabularx}{\linewidth}{%
+      >{\columncolor{rowgray}}L{0.28\linewidth}%
+      >{\columncolor{rowwhite}}L{0.22\linewidth}%
+      >{\columncolor{rowgray}}X}
+    \toprule
+    \rowcolor{navyblue}
+    \hc{Parameter} & \hc{Value} & \hc{Expected Behaviour} \\
+    \midrule
+    \texttt{latex\_report}      & \texttt{False}       & Existing behaviour remains unchanged. \\[0.15em]
+    \texttt{latex\_report}      & \texttt{True}        & Generates a \texttt{.tex} report file. \\[0.15em]
+    \texttt{latex\_output\_path}& \texttt{None}        & Saves output as \texttt{LCCA\_Report.tex}. \\[0.15em]
+    \texttt{latex\_output\_path}& \textit{custom path} & Saves report at the provided path. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\textbf{Important rule:} When \texttt{latex\_report=True}, debug data must be internally
+available for report creation, but debug JSON file dumping should occur only if the
+caller explicitly sets \texttt{debug=True}.
+
+\screenshotplaceholder
+  {Main Entry-Point Update (Add Screenshot)}
+  {Insert screenshot of \texttt{run\_full\_lcc\_analysis()} showing debug/latex behaviour handling.}
+
+% =============================================================================
+\section{Code Architecture and Logic Flow}
+
+\subsection{High-Level Pipeline}
+\begin{enumerate}
+  \item Normalise and validate input (dictionary or \texttt{InputGlobalMetaData}).
+  \item Build stage parameters and construction-cost payload for computation.
+  \item Execute stage-wise calculations using \texttt{StageCostCalculator}.
+  \item Assemble final output:
+        \texttt{initial\_stage}, \texttt{use\_stage}, \texttt{reconstruction},
+        \texttt{end\_of\_life}.
+  \item If requested, generate report with \texttt{core/latex/report.py}.
+\end{enumerate}
+
+\subsection{Module Responsibilities}
+
+\renewcommand{\arraystretch}{1.45}
+\begin{table}[H]
+  \centering
+  \caption{Key modules and their responsibilities.}
+  \small
+  \begin{tabularx}{\linewidth}{%
+      >{\columncolor{rowgray}}L{0.40\linewidth}%
+      >{\columncolor{rowwhite}}X}
+    \toprule
+    \rowcolor{navyblue}
+    \hc{Module} & \hc{Responsibility} \\
+    \midrule
+    \texttt{core/main.py}
+      & Orchestration, validation call, debug/report mode handling. \\[0.15em]
+    \texttt{core/stage\_cost/stage\_cost.py}
+      & Full stage-wise economic, environmental, and social computation logic. \\[0.15em]
+    \texttt{core/stage\_cost/utils/present\_worth\_factor.py}
+      & Present-worth-factor computation for recurring and demolition events. \\[0.15em]
+    \texttt{core/latex/report.py}
+      & Formula parsing, equation rendering, table rendering, and final
+        \texttt{.tex} document generation. \\[0.15em]
+    \texttt{inputs/input.py}, \texttt{inputs/input\_global.py}
+      & Typed input models and schema-level validation. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\screenshotplaceholder
+  {Architecture Flow Diagram (Add Screenshot)}
+  {Insert diagram: Input $\to$ Main $\to$ StageCostCalculator $\to$ Debug Payloads $\to$ \LaTeX{} Report.}
+
+% =============================================================================
+\section{Detailed Cost Logic}
+
+\subsection{Initial Stage}
+Initial stage computes:
+\begin{itemize}
+  \item Initial construction and carbon costs.
+  \item Construction-duration road-user and vehicular-emission costs.
+  \item Time cost of loan.
+\end{itemize}
+
+\begin{equation}
+  C_{\text{loan}} = C_{0} \times r \times t_{c} \times I \times \mathrm{SPWF}
+  \label{eq:loan}
+\end{equation}
+
+where $C_{0}$ is the initial construction cost, $r$ is the interest rate, $t_{c}$ is
+the construction duration in years, and $I$ is the investment ratio.
+
+\subsection{Use Stage}
+Use stage aggregates routine and major interventions:
+\begin{enumerate}
+  \item Routine inspection.
+  \item Periodic maintenance and periodic carbon impact.
+  \item Major inspection.
+  \item Major repair (including disruption-linked RUC and vehicular emissions).
+  \item Bearing/expansion-joint replacement.
+\end{enumerate}
+
+\subsection{Reconstruction Stage}
+Applied only when the analysis period exceeds service life. It combines:
+\begin{itemize}
+  \item Demolition/disposal costs and carbon costs.
+  \item Reconstruction costs discounted by reconstruction demolition factor.
+  \item Disruption RUC and vehicular emissions for demolition and reconstruction periods.
+  \item Time cost of loan for reconstruction and discounted scrap value.
+\end{itemize}
+
+\subsection{End-of-Life Stage}
+Final demolition factor is used to compute:
+\begin{itemize}
+  \item Demolition/disposal cost.
+  \item Demolition carbon cost.
+  \item Demolition-period social and environmental disruption costs.
+  \item Final discounted scrap value.
+\end{itemize}
+
+\screenshotplaceholder
+  {Stage-Wise Output JSON (Add Screenshot)}
+  {Insert screenshot of runtime output showing initial/use/reconstruction/end-of-life result blocks.}
+
+% =============================================================================
+\section{How the \LaTeX{} Report Is Built}
+
+\subsection{Debug Payload Design}
+Each stage breakdown provides three structured data blocks:
+\begin{itemize}
+  \item \texttt{formulae}
+  \item \texttt{inputs}
+  \item \texttt{computed\_values}
+\end{itemize}
+These blocks are consumed by the report engine to generate explainable, traceable
+sections.
+
+\subsection{Rendering Strategy}
+The report generator:
+\begin{enumerate}
+  \item Renders title and project parameter tables.
+  \item Renders construction-cost inputs.
+  \item Renders stage summary tables.
+  \item Renders detailed calculations from debug payloads — formula, explanation,
+        substitution, result, and abbreviation legend.
+  \item Renders cross-stage final summary and optional warnings/notes.
+\end{enumerate}
+
+\subsection{Required Section Order (Task Compliance)}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{table}[H]
+  \centering
+  \caption{Mandatory section order in the generated report.}
+  \small
+  \begin{tabular}{%
+      >{\columncolor{rowgray}}C{0.07\linewidth}%
+      >{\columncolor{rowwhite}}L{0.52\linewidth}}
+    \toprule
+    \rowcolor{navyblue}
+    \hc{\#} & \hc{Section Title} \\
+    \midrule
+    1 & Title Page \\
+    2 & Construction Cost Inputs \\
+    3 & Initial Stage \\
+    4 & Use Stage \\
+    5 & Reconstruction \\
+    6 & End-of-Life Stage \\
+    7 & Summary \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\screenshotplaceholder
+  {Generated Report Pages (Add Screenshot)}
+  {Insert screenshots of one stage summary page and one detailed equation page from the generated PDF.}
+
+% =============================================================================
+\section{Requirement-to-Implementation Mapping}
+
+\renewcommand{\arraystretch}{1.45}
+\begin{table}[H]
+  \centering
+  \caption{Traceability from README requirements to implementation locations.}
+  \small
+  \begin{tabularx}{\linewidth}{%
+      >{\columncolor{rowgray}}L{0.42\linewidth}%
+      >{\columncolor{rowwhite}}X}
+    \toprule
+    \rowcolor{navyblue}
+    \hc{README Requirement} & \hc{Where It Is Addressed} \\
+    \midrule
+    Add \texttt{latex\_report} and \texttt{latex\_output\_path} in entry point
+      & \texttt{core/main.py::run\_full\_lcc\_analysis()} \\[0.15em]
+    Enable internal debug for \LaTeX{} generation without forced debug file dumping
+      & \texttt{requested\_debug} vs \texttt{internal\_debug} handling in
+        \texttt{main.py} \\[0.15em]
+    Generate detailed, human-readable \texttt{.tex} report
+      & \texttt{core/latex/report.py::generate\_latex\_report()} \\[0.15em]
+    Include formula, inputs, substitutions, step-wise result logic
+      & Formula-render and payload-traversal helpers in \texttt{report.py} \\[0.15em]
+    Cover all four lifecycle stages and final summary
+      & Stage rendering loop + final summary builder in \texttt{report.py} \\[0.15em]
+    Add tests
+      & \texttt{tests/test\_main.py}, \texttt{tests/test\_latex\_report.py} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+% =============================================================================
+\section{Testing and Evidence}
+
+\subsection{Test Coverage}
+Current tests cover:
+\begin{itemize}
+  \item Debug file behaviour with \texttt{latex\_report=True} and \texttt{debug=False}.
+  \item Debug file behaviour with explicit \texttt{debug=True}.
+  \item Formula rendering behaviour in report utilities.
+  \item Required report section ordering.
+\end{itemize}
+
+\subsection{Execution Commands}
+\begin{lstlisting}[language=bash]
+python -m src.examples.from_dict.example
+pytest -q
+\end{lstlisting}
+
+\screenshotplaceholder
+  {Test Run Output (Add Screenshot)}
+  {Insert screenshot of \texttt{pytest -q} output showing all tests passing.}
+
+% =============================================================================
+\section{Deliverables Checklist (As Per Task)}
+
+\begin{itemize}[leftmargin=2em]
+  \item[$\square$] Updated \texttt{main.py} with \texttt{latex\_report} and
+                   \texttt{latex\_output\_path}.
+  \item[$\square$] \LaTeX{} report generator module (\texttt{core/latex/report.py}).
+  \item[$\square$] At least one test in \texttt{tests/}.
+  \item[$\square$] Sample generated \texttt{LCCA\_Report.tex}.
+  \item[$\square$] PR with commit history and implementation summary.
+  \item[$\square$] Short walkthrough video covering approach, structure, generation
+                   flow, and output.
+\end{itemize}
+
+\screenshotplaceholder
+  {Submission Artifacts (Add Screenshot)}
+  {Insert screenshot of repository files, PR, and artifacts to be submitted.}
+
+% =============================================================================
+\section{Conclusion}
+
+This implementation directly addresses the README task: it adds report-generation
+controls at the main entry point, preserves debug-file behaviour contracts, and
+produces an auditable \LaTeX{} report that explains formulas, inputs, substitutions,
+and results across all lifecycle stages. The resulting output is suitable for
+engineering review and documentation.
+
+\end{document}
