@@ -70,7 +70,8 @@ Detailed sections include formulas, plain language explanation, input values, su
 
 ## System Architecture
 
-![Untitled Diagram.drawio_3](/home/shreyas/Downloads/images/Untitled Diagram.drawio_3.png)
+<img width="2078" height="526" alt="Untitled Diagram drawio_3" src="https://github.com/user-attachments/assets/6c365886-fea2-4d3e-859d-e08139cd83ce" />
+
 
 ### Architecture Description
 
