@@ -124,4 +124,4 @@ pytest -q
 
 ## Professional Documentation Notes
 
-Use `Project_Report.tex` for submission style reporting with screenshot placeholders and narrative documentation.
+Use `Example_Report.tex` for submission style reporting with screenshot placeholders and narrative documentation.
