@@ -1,5 +1,5 @@
 import json
-from ...three_ps_lcca_core.core.main import run_full_lcc_analysis
+from src.three_ps_lcca_core.core.main import run_full_lcc_analysis
 
 
 # Import user-defined structured inputs
@@ -30,7 +30,7 @@ def execute_analysis(input_data):
 
     try:
         results = run_full_lcc_analysis(
-            input_data, life_cycle_construction_cost_breakdown, debug=True
+            input_data, life_cycle_construction_cost_breakdown, debug=True,latex_report=True,latex_output_path="Example_Report.tex"
         )
 
         print("✔ LCC Analysis Completed Successfully.")

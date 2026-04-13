@@ -1,4 +1,4 @@
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
 from .utils.present_worth_factor import sum_of_present_worth_factor, demolition_spwi
 from ..utils.dump_to_file import dump_to_file
 
@@ -11,11 +11,18 @@ class StageCostCalculator:
         input_params: Dict[str, Any],
         program_inputs: Dict[str, Any],
         debug: bool = False,
+        persist_debug_files: bool = True,
     ):
         self.input_params = input_params
         self.debug = debug
+        self.persist_debug_files = persist_debug_files
+        self._spwf_cache: Dict[int, Dict[str, Any]] = {}
+        self._demolition_spwi_cache: Optional[Dict[str, Any]] = None
+        self._ruc_cost_cache: Dict[tuple[float, Optional[float]], Dict[str, Any]] = {}
+        self._debug_payloads: Dict[str, Any] = {}
 
         general = input_params["general"]
+        self.general = general
 
         self.service_life = general["service_life_years"]
         self.analysis_period = general["analysis_period_years"]
@@ -32,8 +39,29 @@ class StageCostCalculator:
         self.daily_road_user_cost_with_vehicular_emissions = program_inputs.get(
             "daily_road_user_cost_with_vehicular_emissions"
         )
-        self.days_per_month = general.get("days_per_month")
-        self.construction_period_in_yrs = general["construction_period_months"] / 12
+        self.days_per_month = general["days_per_month"]
+        self.construction_period_months = general["construction_period_months"]
+        self.construction_period_in_yrs = self.construction_period_months / 12
+        self.construction_duration_days = self.construction_period_months * self.days_per_month
+        self.social_cost_of_carbon_per_kgco2e = (
+            general["social_cost_of_carbon_per_mtco2e"] / 1000
+        )
+        self.currency_conversion_rate = general["currency_conversion"]
+
+    def _record_debug_payload(
+        self,
+        stage_name: str,
+        file_name: str,
+        payload: Dict[str, Any],
+    ) -> None:
+        if not self.debug:
+            return
+        self._debug_payloads[stage_name] = payload
+        if self.persist_debug_files:
+            dump_to_file(file_name, payload)
+
+    def get_debug_payloads(self) -> Dict[str, Any]:
+        return dict(self._debug_payloads)
 
     # ██████╗ ██████╗ ███████╗███████╗███████╗███╗   ██╗████████╗    ██╗    ██╗ ██████╗ ██████╗ ████████╗██╗  ██╗    ███████╗ █████╗  ██████╗████████╗ ██████╗ ██████╗
     # ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝████╗  ██║╚══██╔══╝    ██║    ██║██╔═══██╗██╔══██╗╚══██╔══╝██║  ██║    ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
@@ -43,6 +71,10 @@ class StageCostCalculator:
     # ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝        ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
 
     def _sum_of_present_worth_factor(self, interval_years: int) -> Dict[str, Any]:
+        cached = self._spwf_cache.get(interval_years)
+        if cached is not None:
+            return cached
+
         result = spwi(
             inflation_rate=self.inflation_rate,
             discount_rate=self.discount_rate,
@@ -53,12 +85,17 @@ class StageCostCalculator:
             debug=self.debug,
         )
 
-        return {
+        payload = {
             "value": result["total"],
             "debug": result if self.debug else None,
         }
+        self._spwf_cache[interval_years] = payload
+        return payload
 
     def _demolition_spwi(self) -> Dict[str, Any]:
+        if self._demolition_spwi_cache is not None:
+            return self._demolition_spwi_cache
+
         result = demolition_spwi(
             inflation_rate=self.inflation_rate,
             discount_rate=self.discount_rate,
@@ -72,10 +109,12 @@ class StageCostCalculator:
             debug=self.debug,
         )
 
-        return {
+        payload = {
             "values": result,
             "debug": result if self.debug else None,
         }
+        self._demolition_spwi_cache = payload
+        return payload
 
     # ██████╗  ██████╗  █████╗ ██████╗     ██╗   ██╗███████╗███████╗██████╗      ██████╗ ██████╗ ███████╗████████╗
     # ██╔══██╗██╔═══██╗██╔══██╗██╔══██╗    ██║   ██║██╔════╝██╔════╝██╔══██╗    ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝
@@ -86,13 +125,23 @@ class StageCostCalculator:
 
     def _road_user_cost_and_carbon_emissions_cost(
         self,
-        duration_days: int = None,
+        duration_days: Optional[float] = None,
         spwf: Optional[float] = None,
     ) -> Dict[str, Any]:
         """
         Computes total Road User Cost (RUC) and Carbon Emission cost.
         Uses `total_daily_ruc` from self.daily_road_user_cost_with_vehicular_emissions to avoid recalculation.
         """
+        if duration_days is None:
+            raise ValueError("duration_days must be provided for road user cost calculation.")
+
+        cache_key = (
+            float(duration_days),
+            float(spwf) if spwf is not None else None,
+        )
+        cached = self._ruc_cost_cache.get(cache_key)
+        if cached is not None:
+            return cached
 
         # Extract daily total RUC
         try:
@@ -107,14 +156,11 @@ class StageCostCalculator:
         total_ruc = daily_ruc * duration_days
 
         # Carbon cost
-        try:
-            scc = self.input_params["general"]["social_cost_of_carbon_per_mtco2e"]/1000
-            conv_rate = self.input_params["general"]["currency_conversion"]
-        except KeyError as exc:
-            raise ValueError(f"Missing required input parameter: {exc}") from exc
-
         total_emission_cost = (
-            emission_kg_per_km * duration_days * scc * conv_rate
+            emission_kg_per_km
+            * duration_days
+            * self.social_cost_of_carbon_per_kgco2e
+            * self.currency_conversion_rate
         )
 
         # Apply Present Worth Factor (SPWF) if given
@@ -134,12 +180,14 @@ class StageCostCalculator:
         )
 
         # Return results
-        return {
+        payload = {
             "ruc_cost": round(total_ruc, 2),
             "vehicular_emission_cost": round(total_emission_cost, 2),
             "combined_social_cost": round(total_ruc + total_emission_cost, 2),
             "debug": debug_info,
         }
+        self._ruc_cost_cache[cache_key] = payload
+        return payload
 
     # ████████╗██╗███╗   ███╗███████╗     ██████╗ ██████╗ ███████╗████████╗    ██╗      ██████╗  █████╗ ███╗   ██╗
     # ╚══██╔══╝██║████╗ ████║██╔════╝    ██╔════╝██╔═══██╗██╔════╝╚══██╔══╝    ██║     ██╔═══██╗██╔══██╗████╗  ██║
@@ -149,11 +197,9 @@ class StageCostCalculator:
     #    ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝       ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝
 
     def time_cost_loan(self, spwi=1):
-        interest_rate = self.input_params["general"]["interest_rate_percent"] / 100
-        time_for_construction_years = (
-            self.input_params["general"]["construction_period_months"] / 12
-        )
-        investment_ratio = self.input_params["general"]["investment_ratio"]
+        interest_rate = self.general["interest_rate_percent"] / 100
+        time_for_construction_years = self.construction_period_in_yrs
+        investment_ratio = self.general["investment_ratio"]
         time_cost_of_loan = (
             self.initial_construction_cost
             * interest_rate
@@ -654,7 +700,7 @@ class StageCostCalculator:
             self.input_params["end_of_life_stage_costs"]["demolition_and_disposal"][
                 "duration_for_demolition_and_disposal_in_months"
             ]
-            * self.input_params["general"]["days_per_month"]
+            * self.days_per_month
         )
         demolition_road_user_cost_data = self._road_user_cost_and_carbon_emissions_cost(
             duration_days=int(duration_of_demolition_in_days), spwf=demolition_spwi
@@ -695,7 +741,7 @@ class StageCostCalculator:
             dict: A dictionary containing the initial cost results.
         """
         ruc = self._road_user_cost_and_carbon_emissions_cost(
-            duration_days=self.construction_period_in_yrs * 12 * self.days_per_month,
+            duration_days=self.construction_duration_days,
             spwf=1,
         )
         time_cost_loan = self.time_cost_loan()
@@ -726,7 +772,11 @@ class StageCostCalculator:
                 "road_user_cost_breakdown": ruc["debug"],
                 "total_time_cost_of_loan": time_cost_loan["breakdown"],
             }
-            dump_to_file("stage_costs_1-initial_cost_breakdown.json", breakdown)
+            self._record_debug_payload(
+                "initial_stage",
+                "stage_costs_1-initial_cost_breakdown.json",
+                breakdown,
+            )
 
         return {
             "economic": {
@@ -767,7 +817,8 @@ class StageCostCalculator:
         )
 
         if self.debug:
-            dump_to_file(
+            self._record_debug_payload(
+                "use_stage",
                 "stage_costs_2-use_stage_cost_breakdown.json",
                 {
                     "routine_inspection_costs": routine,
@@ -836,11 +887,9 @@ class StageCostCalculator:
                 "Note": "Analysis period is less than or equal to service life; reconstruction costs are not applicable."
             }
 
-        duration_of_reconstruction_in_days = (
-            self.input_params["general"]["construction_period_months"]
-            * self.input_params["general"]["days_per_month"]
-        )
-        demolition_spwi = self._demolition_spwi()["values"]["reconstruction_demolition"]
+        duration_of_reconstruction_in_days = self.construction_duration_days
+        demolition_spwi_full = self._demolition_spwi()
+        demolition_spwi = demolition_spwi_full["values"]["reconstruction_demolition"]
         reconstruction = self.construction_costs(
             duration_of_reconstruction_in_days, demolition_spwi
         )
@@ -858,12 +907,13 @@ class StageCostCalculator:
         total_scrap_cost = self.total_scrap_cost * demolition_spwi
 
         if self.debug:
-            dump_to_file(
+            self._record_debug_payload(
+                "reconstruction",
                 "stage_costs_3-Reconstruction_breakdown.json",
                 {
-                    "present_worth_factor_for_demolition": self._demolition_spwi()[
-                        "debug"
-                    ]["reconstruction_demolition_breakdown"],
+                    "present_worth_factor_for_demolition": demolition_spwi_full["debug"][
+                        "reconstruction_demolition_breakdown"
+                    ],
                     "demolition_and_disposal_breakdown": demolition_and_disposal[
                         "breakdown"
                     ],
@@ -960,7 +1010,8 @@ class StageCostCalculator:
         )
         total_scrap_cost = self.total_scrap_cost * demolition_spwi
         if self.debug:
-            dump_to_file(
+            self._record_debug_payload(
+                "end_of_life",
                 "stage_costs_4-end_of_life_breakdown.json",
                 {
                     "present_worth_factor_for_demolition": demolition_spwi_full[
