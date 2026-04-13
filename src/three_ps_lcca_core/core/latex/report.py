@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -101,23 +102,31 @@ SECTION_COMMANDS = {
     3: "subsubsection",
 }
 COMPACT_HEADING_AFTERSPACE = "-0.35em"
+COMPACT_HEADING_BEFORESPACE = "0.4em"
+TABLE_AFTERSPACE = "0.6em"
+HEADING_NEEDSPACE_BY_LEVEL = {
+    1: 10,
+    2: 8,
+    3: 6,
+    4: 5,
+}
+LATEX_ESCAPE_REPLACEMENTS = (
+    ("\\", r"\textbackslash{}"),
+    ("&", r"\&"),
+    ("%", r"\%"),
+    ("$", r"\$"),
+    ("#", r"\#"),
+    ("_", r"\_"),
+    ("{", r"\{"),
+    ("}", r"\}"),
+    ("~", r"\textasciitilde{}"),
+    ("^", r"\textasciicircum{}"),
+)
 
 
 def escape_latex(value: Any) -> str:
     text = str(value)
-    replacements = {
-        "\\": r"\textbackslash{}",
-        "&": r"\&",
-        "%": r"\%",
-        "$": r"\$",
-        "#": r"\#",
-        "_": r"\_",
-        "{": r"\{",
-        "}": r"\}",
-        "~": r"\textasciitilde{}",
-        "^": r"\textasciicircum{}",
-    }
-    for old, new in replacements.items():
+    for old, new in LATEX_ESCAPE_REPLACEMENTS:
         text = text.replace(old, new)
     return text
 
@@ -155,8 +164,13 @@ def format_math_number(value: Any) -> str:
 def render_heading(title: str, level: int) -> str:
     if level <= 3:
         command = SECTION_COMMANDS[level]
-        return f"\\{command}{{{escape_latex(humanize_key(title))}}}\n"
+        return (
+            f"\\Needspace{{{HEADING_NEEDSPACE_BY_LEVEL[level]}\\baselineskip}}\n"
+            f"\\{command}{{{escape_latex(humanize_key(title))}}}\n"
+        )
     return (
+        f"\\Needspace{{{HEADING_NEEDSPACE_BY_LEVEL[4]}\\baselineskip}}\n"
+        f"\\vspace{{{COMPACT_HEADING_BEFORESPACE}}}\n"
         f"\\textbf{{{escape_latex(humanize_key(title))}}}\\par"
         f"\\vspace{{{COMPACT_HEADING_AFTERSPACE}}}\n"
     )
@@ -181,13 +195,15 @@ def auto_symbol(name: str) -> str:
     return "".join(part[0].upper() for part in seed[:4])
 
 
-def tokenize_formula(formula: str) -> list[str]:
+@lru_cache(maxsize=1024)
+def tokenize_formula(formula: str) -> tuple[str, ...]:
     prepared = formula
     for operator in ("(", ")", "+", "-", "/", "=", "*"):
         prepared = prepared.replace(operator, f" {operator} ")
-    return prepared.split()
+    return tuple(prepared.split())
 
 
+@lru_cache(maxsize=1024)
 def is_symbolic_formula(formula: str) -> bool:
     stripped = formula.strip()
     if not stripped:
@@ -217,6 +233,7 @@ def normalize_operator(token: str) -> str:
     return FORMULA_OPERATORS.get(token, token)
 
 
+@lru_cache(maxsize=1024)
 def parse_formula(formula: str) -> Any:
     tokens = tokenize_formula(formula)
     position = 0
@@ -544,7 +561,11 @@ def render_tabularx(
     ]
     for left, right in rows:
         parts.append(f"{left} & {right} \\\\\n")
-    parts.append("\\bottomrule\n\\end{tabularx}\n")
+    parts.append(
+        "\\bottomrule\n"
+        "\\end{tabularx}\n"
+        f"\\vspace{{{TABLE_AFTERSPACE}}}\n"
+    )
     return "".join(parts)
 
 
@@ -565,7 +586,11 @@ def render_longtable(
     ]
     for left, right in rows:
         parts.append(f"{left} & {right} \\\\\n")
-    parts.append("\\bottomrule\n\\end{longtable}\n")
+    parts.append(
+        "\\bottomrule\n"
+        "\\end{longtable}\n"
+        f"\\vspace{{{TABLE_AFTERSPACE}}}\n"
+    )
     return "".join(parts)
 
 
@@ -759,13 +784,19 @@ def load_debug_payloads() -> dict[str, Any]:
 
 def render_title_page(
     input_data: dict[str, Any] | None,
-    construction_costs: dict[str, Any] | None,
 ) -> str:
     parts = [
-        "\\title{Life Cycle Cost Analysis Report}\n",
-        "\\author{3psLCCA Engine}\n",
-        "\\date{\\today}\n",
-        "\\maketitle\n",
+        "\\thispagestyle{empty}\n",
+        "\\vspace*{0.15\\textheight}\n",
+        "\\begin{center}\n",
+        "{\\Huge\\bfseries Life Cycle Cost Analysis Report\\par}\n",
+        "\\vspace{1.5em}\n",
+        "{\\Large 3psLCCA Engine\\par}\n",
+        "\\vspace{1em}\n",
+        "{\\large \\today\\par}\n",
+        "\\end{center}\n",
+        "\\vspace{3.5em}\n",
+        "\\section*{Project Parameters}\n", # Restored to match pytest
     ]
 
     general_parameters = {}
@@ -773,7 +804,6 @@ def render_title_page(
         general_parameters = input_data.get("general_parameters", {})
 
     if general_parameters:
-        parts.append("\\section*{Project Parameters}\n")
         parts.append(
             render_kv_table(
                 {
@@ -784,16 +814,31 @@ def render_title_page(
                 headers=("Parameter", "Value"),
             )
         )
+    else:
+        parts.append("No project parameters were provided.\n")
+
+    parts.append("\\clearpage\n")
+    return "".join(parts)
+
+
+def render_construction_cost_inputs(
+    construction_costs: dict[str, Any] | None,
+) -> str:
+    parts = [
+        "\\section*{Construction Cost Inputs}\n",
+    ]
 
     if construction_costs:
-        parts.append("\\section*{Construction Cost Inputs}\n")
         parts.append(
             render_kv_table(
                 construction_costs,
                 headers=("Construction Input", "Value"),
             )
         )
+    else:
+        parts.append("No construction cost inputs were provided.\n")
 
+    parts.append("\\clearpage\n")
     return "".join(parts)
 
 
@@ -831,6 +876,7 @@ def generate_latex_report(
         "\\usepackage{tabularx}\n",
         "\\usepackage{longtable}\n",
         "\\usepackage{adjustbox}\n",
+        "\\usepackage{needspace}\n",
         "\\usepackage{enumitem}\n",
         "\\geometry{margin=1in}\n",
         "\\setlength{\\parindent}{0pt}\n",
@@ -838,9 +884,11 @@ def generate_latex_report(
         "\\setlength{\\emergencystretch}{2em}\n",
         "\\allowdisplaybreaks\n",
         "\\begin{document}\n",
-        render_title_page(input_data, construction_costs),
+        render_title_page(input_data),
+        render_construction_cost_inputs(construction_costs),
     ]
 
+    first_stage_rendered = False
     for stage_name in ("initial_stage", "use_stage", "reconstruction", "end_of_life"):
         stage_data = data.get(stage_name)
         if stage_data is None:
@@ -850,6 +898,8 @@ def generate_latex_report(
             if isinstance(debug_payloads, dict)
             else None
         )
+        if first_stage_rendered:
+            latex_parts.append("\\clearpage\n")
         latex_parts.append(
             render_stage_summary(
                 stage_name,
@@ -857,16 +907,20 @@ def generate_latex_report(
                 debug_payload=stage_debug_payload,
             )
         )
+        first_stage_rendered = True
 
+    latex_parts.append("\\clearpage\n")
     latex_parts.append(render_final_summary(data))
 
     warnings = data.get("warnings")
     if warnings:
+        latex_parts.append("\\clearpage\n")
         latex_parts.append("\\section{Warnings}\n")
         latex_parts.append(render_list(warnings if isinstance(warnings, list) else [warnings]))
 
     notes = data.get("notes")
     if notes:
+        latex_parts.append("\\clearpage\n")
         latex_parts.append("\\section{Notes}\n")
         latex_parts.append(render_list(notes if isinstance(notes, list) else [notes]))
 
@@ -874,5 +928,3 @@ def generate_latex_report(
 
     with output_file.open("w", encoding="utf-8") as handle:
         handle.write("".join(latex_parts))
-
-    print(f"LaTeX report generated at: {output_file}")
